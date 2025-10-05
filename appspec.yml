@@ -3,7 +3,7 @@ os: linux
 files:
   - source: .next
     destination: /var/www/docbooker
-
+file_exists_behavior: OVERWRITE
 hooks:
   AfterInstall:
     - location: scripts/install_dependencies.sh
