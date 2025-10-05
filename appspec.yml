@@ -4,7 +4,20 @@ files:
   - source: .next
     destination: /var/www/docbooker
 file_exists_behavior: OVERWRITE
+permissions:
+  - object: /opt/codedeploy-agent/deployment-root/*/*/deployment-archive/scripts
+    pattern: "**"
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - file
+
 hooks:
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
   ApplicationStart:
     - location: scripts/start_application.sh
       timeout: 300
