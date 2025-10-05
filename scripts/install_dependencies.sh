@@ -5,11 +5,8 @@ echo "Installing dependencies and setting up application..."
 mkdir -p /var/www/docbooker
 
 # Set proper ownership and permissions
-chown -R ec2-user:ec2-user /var/www/docbooker
+chown -R nginx:nginx /var/www/docbooker
 chmod -R 755 /var/www/docbooker
-
-cp -rf .next/static/*  /var/www/docbooker
-cp -rf .next/standalone/*  /var/www/docbooker
 
 # Install Node.js if not present
 if ! command -v node &> /dev/null; then
