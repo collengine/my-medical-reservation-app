@@ -10,9 +10,9 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-xl font-bold text-gray-900">
-            <Image 
-                src={heroImageUrl} 
-                alt="Doctor and Patient booking appointment" 
+              <Image
+                src={heroImageUrl}
+                alt="Doctor and Patient booking appointment"
                 width={128}
                 height={48}
               />
@@ -34,12 +34,20 @@ export default function Header() {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-2 text-sm font-medium">
-            <button className="text-gray-600 hover:text-indigo-600 px-3 py-1">
-              Login
-            </button>
-            <button className="px-4 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150 shadow-md">
-              Sign Up
-            </button>
+            
+            <div className="flex items-center space-x-2 text-sm font-medium">
+              {/* The Login Button/Link is now pointing to the new page */}
+              <Link
+                href="/login"
+                className="px-4 py-1.5 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition" // Applying styling from the new login page header
+              >
+                Login
+              </Link>
+
+              <Link href="/signup" className="px-4 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150 shadow-md">
+                Sign Up
+              </Link>
+            </div>
           </div>
         </div>
       </div>
