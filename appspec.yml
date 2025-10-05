@@ -4,7 +4,7 @@ files:
   - source: .next
     destination: /var/www/docbooker
   - source: scripts
-    destination: /opt/scripts
+    destination: /var/www/docbooker
 file_exists_behavior: OVERWRITE
 permissions:
   - object: /var/www/docbooker
@@ -25,10 +25,10 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: /opt/scripts/start_application.sh
+    - location: scripts/start_application.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: /opt/scripts/stop_application.sh
+    - location: scripts/stop_application.sh
       timeout: 300
       runas: root
