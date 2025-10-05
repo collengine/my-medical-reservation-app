@@ -15,7 +15,7 @@ export default function Hero() {
               Book Your Next Doctor's Appointment With Ease
             </h1>
             <p className="mt-6 text-xl text-gray-500 max-w-lg">
-              <span style="weight=bold">DocBooke</span>r simplifies healthcare, allowing you to find a doctor, manage your medical appointments effortlessly. Experience care with just a piece of mind.
+              DocBooker simplifies healthcare, allowing you to find a doctor, manage your medical appointments effortlessly. Experience care with just a piece of mind.
             </p>
             <div className="mt-8">
               <button className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
