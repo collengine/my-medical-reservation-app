@@ -1,14 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: .next/static
-    destination: /var/www/docbooker/.next/static
-  - source: .next/standalone
+  - source: .next
     destination: /var/www/docbooker
-  - source: public
-    destination: /var/www/docbooker/public
-  - source: package.json
-    destination: /var/www/docbooker/package.json
   - source: scripts
     destination: /opt/scripts
 file_exists_behavior: OVERWRITE
