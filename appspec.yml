@@ -5,10 +5,6 @@ files:
     destination: /var/www/docbooker
 
 hooks:
-  BeforeInstall:
-    - location: scripts/stop_application.sh
-      timeout: 300
-      runas: root
   AfterInstall:
     - location: scripts/install_dependencies.sh
       timeout: 300
