@@ -69,4 +69,10 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S) 
+  name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
+  base-directory: '.'
+
+cache:
+  paths:
+    - 'node_modules/**/*'
+    - '.next/cache/**/*'
