@@ -11,9 +11,5 @@ cp -rf .next/standalone/*  /var/www/docbooker
 if ! command -v node &> /dev/null; then
     yum install -y nodejs npm
 fi
-# Navigate to application directory and install dependencies
-cd /var/www/docbooker
-if [ -f package.json ]; then
-    npm install --production
-fi
+
 echo "Dependencies installed successfully"
