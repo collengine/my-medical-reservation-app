@@ -69,11 +69,14 @@ phases:
 artifacts:
   files:
     - '.next/**/*'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'public/**/*'
     - 'appspec.yml'
-    - 'scripts/**'
-    
+    - 'scripts/**/*'
+    - '**/*'
   name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
-  base-directory: '.'
+  base-directory: '.'   
 
 cache:
   paths:
