@@ -1,15 +1,27 @@
 version: 0.0
 os: linux
 files:
-  - source: .next
+  - source: .next/static
+    destination: /var/www/docbooker/.next/static
+  - source: .next/standalone
     destination: /var/www/docbooker
-  - source: appspec.yml
-    destination: /var/www/docbooker
+  - source: public
+    destination: /var/www/docbooker/public
+  - source: package.json
+    destination: /var/www/docbooker/package.json
   - source: scripts
-    destination: /var/www/docbooker
+    destination: /opt/scripts
 file_exists_behavior: OVERWRITE
 permissions:
-  - object: /opt/codedeploy-agent/deployment-root/*/*/deployment-archive/scripts
+  - object: /var/www/docbooker
+    pattern: "**"
+    owner: nginx
+    group: nginx
+    mode: 755
+    type:
+      - directory
+      - file
+  - object: /opt/scripts
     pattern: "**"
     owner: root
     group: root
@@ -19,10 +31,10 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: scripts/start_application.sh
+    - location: /opt/scripts/start_application.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: scripts/stop_application.sh
+    - location: /opt/scripts/stop_application.sh
       timeout: 300
       runas: root
