@@ -35,7 +35,7 @@ phases:
           echo "Stack exists, updating..."
           aws cloudformation update-stack \
             --stack-name $STACK_NAME \
-            --template-body file://vpc-nginx-template.yml \
+            --template-body file://cloud-formation-template.yaml \
             --capabilities CAPABILITY_IAM \
             --region $AWS_DEFAULT_REGION
           
@@ -47,7 +47,7 @@ phases:
           echo "Stack does not exist, creating..."
           aws cloudformation create-stack \
             --stack-name $STACK_NAME \
-            --template-body file://vpc-nginx-template.yml \
+            --template-body file://cloud-formation-template.yaml \
             --capabilities CAPABILITY_IAM \
             --region $AWS_DEFAULT_REGION
           
