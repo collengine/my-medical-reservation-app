@@ -1,0 +1,15 @@
+[Unit]
+Description=DocBooker Next.js Server
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+
+WorkingDirectory=/var/www/docbooker
+ExecStart=/usr/bin/node server.js
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
