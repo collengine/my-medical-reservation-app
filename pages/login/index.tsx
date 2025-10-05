@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { useRouter } from 'next/navigation';
 export default function LoginPage() {
   
   // NOTE: Assuming you have a logo image saved in /public/images/docbooker-logo.png
   // Replace the image source with your actual logo component or image path if different.
   const logoUrl = "/images/docbooker-logo.png";
-
+  const router = useRouter(); 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // 1. Get form data (e.g., Email and Password)
@@ -16,6 +16,7 @@ export default function LoginPage() {
     // 3. Send data to your API route or backend service
     // 4. On success, redirect the user to their dashboard
     console.log("Login button clicked. Implement form submission logic here.");
+    router.push('/dashboard'); 
   };
 
   return (
