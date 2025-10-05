@@ -70,7 +70,7 @@ artifacts:
   files:
     - '.next/**/*'
     - 'appspec.yml'
-    - 'scripts/**'
+    - 'scripts/**/*'
     
   name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
   base-directory: '.'
