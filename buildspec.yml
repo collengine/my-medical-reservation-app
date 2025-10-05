@@ -34,7 +34,7 @@ phases:
           echo "Stack exists, updating..."
           aws cloudformation update-stack \
             --stack-name $STACK_NAME \
-            --template-body file://cloud-formation-template.yaml \
+            --template-body file://vpc-nginx-template.yml \
             --capabilities CAPABILITY_IAM \
             --region $AWS_DEFAULT_REGION
           
@@ -46,7 +46,7 @@ phases:
           echo "Stack does not exist, creating..."
           aws cloudformation create-stack \
             --stack-name $STACK_NAME \
-            --template-body file://cloud-formation-template.yaml \
+            --template-body file://vpc-nginx-template.yml \
             --capabilities CAPABILITY_IAM \
             --region $AWS_DEFAULT_REGION
           
@@ -67,8 +67,14 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
+    - '.next/**/*'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'public/**/*'
+    - 'appspec.yml'
+    - 'scripts/**/*'
   name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
+  base-directory: '.'
 
 cache:
   paths:
