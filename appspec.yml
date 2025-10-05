@@ -1,7 +1,11 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: .next
+    destination: /var/www/docbooker
+  - source: appspec.yml
+    destination: /var/www/docbooker
+  - source: scripts
     destination: /var/www/docbooker
 file_exists_behavior: OVERWRITE
 permissions:
