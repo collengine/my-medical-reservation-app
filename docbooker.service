@@ -7,6 +7,9 @@ User=ec2-user
 Group=ec2-user
 
 WorkingDirectory=/var/www/docbooker
+
+Environment="NODE_ENV=production" "PORT=3000"
+
 ExecStart=/usr/bin/node server.js
 
 Restart=always
