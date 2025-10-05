@@ -62,18 +62,25 @@ phases:
   post_build:
     commands:
       - echo Post-build phase started on `date`
+      - echo Listing build contents...
+      - ls -la
+      - echo Listing .next contents...
+      - ls -la .next/ || echo "No .next directory found"
+      - echo Listing scripts contents...
+      - ls -la scripts/ || echo "No scripts directory found"
       - echo Getting stack outputs...
       - aws cloudformation describe-stacks --stack-name $STACK_NAME --region $AWS_DEFAULT_REGION --query 'Stacks[0].Outputs'
       - echo Build completed on `date`
 
 artifacts:
   files:
-    - '.next/**/*'
-    - 'appspec.yml'
-    - 'scripts/**/*'
-    
+    - '**/*'
   name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
   base-directory: '.'
+  exclude-paths:
+    - 'node_modules/**/*'
+    - '.git/**/*'
+    - '.next/cache/**/*'
 
 cache:
   paths:
