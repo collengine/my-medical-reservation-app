@@ -19,7 +19,7 @@ export default function Hero() {
             </p>
             <div className="mt-8">
               <button className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
-                Get Started Now
+                Get Started Today
               </button>
             </div>
           </div>
