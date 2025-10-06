@@ -1,0 +1,34 @@
+version: 0.0
+os: linux
+files:
+  - source: .next
+    destination: /var/www/docbooker
+  - source: scripts
+    destination: /var/www/docbooker
+file_exists_behavior: OVERWRITE
+permissions:
+  - object: /var/www/docbooker
+    pattern: "**"
+    owner: nginx
+    group: nginx
+    mode: 755
+    type:
+      - directory
+      - file
+  - object: /opt/scripts
+    pattern: "**"
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - file
+
+hooks:
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: root

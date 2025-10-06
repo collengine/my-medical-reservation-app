@@ -1,0 +1,88 @@
+version: 0.2
+
+env:
+  variables:
+    NODE_VERSION: "18"
+    STACK_NAME: "nginx-vpc-stack"
+    AWS_DEFAULT_REGION: "us-east-1"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm ci
+
+  pre_build:
+    commands:
+      - echo Pre-build phase started on `date`
+      - echo Checking Node.js and npm versions
+      - node --version
+      - npm --version
+
+  build:
+    commands:
+      - echo Build phase started on `date`
+      - echo Building Next.js application...
+      - npm install
+      - npm run build
+      - echo Build completed successfully
+      
+      - echo Deploying/updating CloudFormation stack...
+      - |
+        if aws cloudformation describe-stacks --stack-name $STACK_NAME --region $AWS_DEFAULT_REGION > /dev/null 2>&1; then
+          echo "Stack exists, updating..."
+          aws cloudformation update-stack \
+            --stack-name $STACK_NAME \
+            --template-body file://cloud-formation-template.yaml \
+            --capabilities CAPABILITY_IAM \
+            --region $AWS_DEFAULT_REGION
+          
+          echo "Waiting for stack update to complete..."
+          aws cloudformation wait stack-update-complete \
+            --stack-name $STACK_NAME \
+            --region $AWS_DEFAULT_REGION
+        else
+          echo "Stack does not exist, creating..."
+          aws cloudformation create-stack \
+            --stack-name $STACK_NAME \
+            --template-body file://cloud-formation-template.yaml \
+            --capabilities CAPABILITY_IAM \
+            --region $AWS_DEFAULT_REGION
+          
+          echo "Waiting for stack creation to complete..."
+          aws cloudformation wait stack-create-complete \
+            --stack-name $STACK_NAME \
+            --region $AWS_DEFAULT_REGION
+        fi
+      
+      - echo CloudFormation stack operation completed successfully
+
+  post_build:
+    commands:
+      - echo Post-build phase started on `date`
+      - echo Listing build contents...
+      - ls -la
+      - echo Listing .next contents...
+      - ls -la .next/ || echo "No .next directory found"
+      - echo Listing scripts contents...
+      - ls -la scripts/ || echo "No scripts directory found"
+      - echo Getting stack outputs...
+      - aws cloudformation describe-stacks --stack-name $STACK_NAME --region $AWS_DEFAULT_REGION --query 'Stacks[0].Outputs'
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - '**/*'
+  name: nextjs-build-$(date +%Y-%m-%d-%H-%M-%S)
+  base-directory: '.'
+  exclude-paths:
+    - 'node_modules/**/*'
+    - '.git/**/*'
+    - '.next/cache/**/*'
+
+cache:
+  paths:
+    - 'node_modules/**/*'
+    - '.next/cache/**/*'
